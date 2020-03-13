@@ -1,0 +1,42 @@
+.c-item {
+    @include lg(margin, 2rem 0);
+    position: relative;
+    overflow: hidden;
+    margin: 1rem 0;
+    box-shadow: 0 1px 3px hsla(0, 0%, 0%, .2);
+    line-height: 0;
+    border-radius: 5px;
+    &-text {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 1rem;
+        transition: all 300ms ease;
+        line-height: normal;
+        color: #ffffff;
+        background-color: rgba(0, 0, 0, .7);
+        opacity: 0;
+        font-weight: 500;
+        .name {
+            text-shadow: 0 0 50px hsla(0, 0%, 0%, .4);
+            text-transform: uppercase;
+            font-size: rem(16);
+        }
+        .tags {
+            text-shadow: 0 0 50px hsla(0, 0%, 0%, .4);
+            margin: 1rem 0 0 0;
+            font-size: rem(13);
+        }
+        .btn {
+            margin: 2rem 0 0 0;
+            text-decoration: none;
+        }
+    }
+    &:hover {
+        .c-item-text {
+            opacity: 1;
+        }
+    }
+}

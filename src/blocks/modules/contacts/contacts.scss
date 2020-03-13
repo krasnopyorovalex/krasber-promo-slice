@@ -1,0 +1,47 @@
+.contacts {
+    background: rgba(0, 145, 200, 0.65);
+    .s-title {
+        margin: 0 0 2rem 0;
+    }
+}
+
+.c-form {
+    @include lg(margin, 0);
+    max-width: 460px;
+    margin: 0 0 3rem 0;
+}
+
+.c-details {
+    ul {
+        list-style: none;
+        li {
+            @include lg(font-size, rem(24));
+            @include lg(justify-content, flex-start);
+            display: flex;
+            align-items: center;
+            color: #ffffff;
+            font-size: rem(18);
+            justify-content: center;
+            & + li {
+                margin: 1.5rem 0;
+            }
+            svg {
+                width: 28px;
+                height: 28px;
+                margin: 0 1rem 0 0;
+            }
+            a {
+                @include lg(font-size, rem(24));
+                color: #ffffff;
+                font-size: rem(18);
+                text-decoration: none;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+            span {
+                margin: 0 .5rem 0 0;
+            }
+        }
+    }
+}

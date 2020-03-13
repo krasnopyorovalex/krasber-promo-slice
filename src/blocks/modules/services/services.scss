@@ -1,0 +1,52 @@
+.s-item {
+    box-sizing: border-box;
+    margin: 2rem 0 0 0;
+    padding: 0 0 1rem 0;
+    box-shadow: 0 1px 3px hsla(0, 0%, 0%, .2);
+    text-align: center;
+    &-name {
+        padding: 1rem 0;
+        font-weight: 500;
+        text-align: center;
+        font-size: rem(20);
+    }
+    &-price {
+        padding: 1rem 0;
+        background: #59b7db;
+        text-align: center;
+        span {
+            font-weight: 500;
+            font-size: rem(22);
+        }
+    }
+    &-desc {
+        padding: 0 1rem;
+        font-size: rem(14);
+        line-height: 20px;
+        text-align: left;
+    }
+    &-text {
+        padding: 0 1rem;
+        text-align: left;
+        ul {
+            list-style: none;
+            li {
+                display: flex;
+                align-items: center;
+                margin: .5rem 0;
+                padding: 1rem 0 .5rem 0;
+                & + li {
+                    border-top: 1px solid #f0f5f5;
+                }
+                svg {
+                    width: 22px;
+                    height: 22px;
+                }
+            }
+        }
+    }
+    &-btn {
+        display: inline-block;
+        margin: 2rem 0 1rem 0;
+    }
+}

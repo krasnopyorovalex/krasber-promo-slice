@@ -1,0 +1,154 @@
+header {
+    height: 100vh;
+    background-image: url("../img/h-bg.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center bottom;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+.h-top {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    &-logo {
+        @include lg(max-width, 150px);
+        max-width: 100px;
+        line-height: 0;
+    }
+    &-menu {
+        @include lg(display, inline-block);
+        @include lg(position, relative);
+        display: none;
+        position: fixed;
+        z-index: 110;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 2.5rem;
+        margin: 0 auto;
+        &:before {
+            @include lg(display, none);
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, .85);
+        }
+        ul {
+            li {
+                @include lg(display, inline-block);
+                @include lg(padding, 0 .5rem);
+                display: block;
+                position: relative;
+                padding: 1rem 1rem 0 1rem;
+                text-align: right;
+                &.active, &:hover {
+                    a {
+                        @include lg(color, $text_color);
+                        color: #ffffff;
+                    }
+                }
+                & + li {
+                    @include lg(margin, 0 0 0 .5rem);
+                    @include lg(border, none);
+                    margin: 1rem 0;
+                    border-top: 1px solid #688484;
+                    &:before {
+                        @include lg(display, inline-block);
+                        content: "/";
+                        display: none;
+                        position: absolute;
+                        left: -.5rem;
+                    }
+                }
+            }
+        }
+        a {
+            @include lg(color, $link_color);
+            color: #ffffff;
+            font-weight: 500;
+            text-decoration: none;
+        }
+    }
+    &-phone {
+        @include lg(display, inline-block);
+        display: none;
+        a {
+            color: $text_color;
+            text-decoration: none;
+        }
+    }
+    &-btn {
+        @include lg(mrgin, 0 0 0 auto);
+        margin: 0 auto;
+    }
+}
+.h-title {
+    @include lg(margin, 5rem 0 0 0);
+    @include lg(font-size, rem(36));
+    font-weight: 700;
+    line-height: 42px;
+    font-size: rem(30);
+    margin: 2rem 0 0 0;
+}
+.h-subtitle {
+    font-size: rem(20);
+    margin: 3rem 0 0 0;
+}
+.h-btn {
+    margin: 3rem 0 0 0;
+    .btn {
+        box-shadow: none;
+        display: inline-block;
+        border: 2px dashed #db1b18;
+        font-weight: 500;
+        background: none;
+        color: $text_color;
+        &:hover {
+            border: 2px dashed #abbbc4;
+        }
+    }
+}
+.h-from-price {
+    @include lg(margin, 0 0 0 2rem);
+    display: inline-block;
+    margin: 1rem 0 0 0;
+    padding: 0 20px;
+    background-color: #ff3721;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: rem(14);
+    box-shadow: 0 1px 3px hsla(0, 0%, 0%, .2);
+    span {
+        font-size: rem(22);
+    }
+}
+.h-mob-menu {
+    @include lg(display, none);
+    display: inline-block;
+    position: fixed;
+    z-index: 100;
+    right: .25rem;
+    margin: 0 .5rem 0 0;
+    padding: 10px;
+    border-radius: 50%;
+    line-height: 0;
+    background-color: #fff;
+    box-shadow: 0 1px 3px hsla(0, 0%, 0%, .2);
+    svg {
+        width: 28px;
+        height: 28px;
+    }
+    &-close {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        svg {
+            width: 40px;
+            height: 40px;
+        }
+    }
+}
