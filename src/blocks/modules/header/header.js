@@ -29,6 +29,7 @@ $(document).ready(() => {
     const hTopMenu = $(".h-top-menu");
     if (hMobMenu.length) {
         hMobMenu.on("click", function () {
+            hTopMenu.addClass("is-opened");
             return hTopMenu.fadeIn() && btnCloseMenu.fadeIn();
         });
 
@@ -38,7 +39,12 @@ $(document).ready(() => {
 
         hTopMenu.on("click", 'li a', function (event) {
             event.preventDefault();
-            return scrollTo($(this).attr("href"), 1000) && hTopMenu.fadeOut() && btnCloseMenu.fadeOut();
+
+            if (hTopMenu.hasClass("is-opened")) {
+                return scrollTo($(this).attr("href"), 1000) && hTopMenu.fadeOut() && btnCloseMenu.fadeOut();
+            }
+
+            return true;
         });
     }
 
