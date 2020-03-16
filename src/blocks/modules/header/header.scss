@@ -5,19 +5,26 @@ header {
     background-size: cover;
     background-position: center bottom;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    padding: 82px 0 0 0;
 }
 .h-top {
     display: flex;
     align-items: center;
     padding: 1rem 0;
+    transition: all 300ms ease;
     &-logo {
         @include lg(max-width, 150px);
         max-width: 100px;
+        transition: all 300ms ease;
         line-height: 0;
     }
     &-menu {
         @include lg(display, inline-block);
         @include lg(position, relative);
+        @include lg(left, unset);
+        @include lg(top, unset);
+        @include lg(bottom, unset);
+        @include lg(right, unset);
         display: none;
         position: fixed;
         z-index: 110;
@@ -81,10 +88,11 @@ header {
         }
     }
     &-btn {
-        @include lg(mrgin, 0 0 0 auto);
+        @include lg(margin, 0 0 0 auto);
         margin: 0 auto;
     }
 }
+
 .h-title {
     @include lg(margin, 5rem 0 0 0);
     @include lg(font-size, rem(36));
@@ -149,6 +157,24 @@ header {
         svg {
             width: 40px;
             height: 40px;
+        }
+    }
+}
+nav {
+    @include lg(position, fixed);
+    position: relative;
+    z-index: 100;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .09);
+    &.p-cleared {
+        .h-top {
+            @include lg(padding, 0);
+            &-logo {
+                @include lg(max-width, 120px);
+            }
         }
     }
 }

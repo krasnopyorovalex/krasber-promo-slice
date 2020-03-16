@@ -14,6 +14,7 @@
 .c-details {
     ul {
         list-style: none;
+        padding: 0;
         li {
             @include lg(font-size, rem(24));
             @include lg(justify-content, flex-start);

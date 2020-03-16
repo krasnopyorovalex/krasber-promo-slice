@@ -4,10 +4,31 @@ import "jquery-mask-plugin";
 
 $(document).ready(() => {
 
-    const btn = $("header .h-top-btn .btn");
+    const nav = $("nav");
+    let navHeight = nav.innerHeight();
+
+    const headerHeight = $("header").innerHeight();
+
+    const toggleClassNav = function () {
+        if (nav.offset().top > headerHeight/2) {
+            nav.addClass('p-cleared');
+        } else {
+            nav.removeClass('p-cleared');
+        }
+    };
+
+    toggleClassNav();
+
+    $(window).scroll(toggleClassNav);
+
+    if (window.innerWidth < 992) {
+        navHeight = 0;
+    }
+
+    const btn = $("nav .btn");
     const sectionContacts = $("#s-contacts");
     if (btn.length && sectionContacts.length) {
-        btn.on("click", () => scrollTo(sectionContacts, 1000));
+        btn.on("click", () => scrollTo(sectionContacts, 1000, {offset: navHeight * -1}));
     }
 
     const btnOrder = $(".h-btn .btn, .s-item .btn");
@@ -20,7 +41,7 @@ $(document).ready(() => {
                 sectionOrder.find(`select option[value='${service}']`).attr("selected", "selected");
             }
 
-            return scrollTo(sectionOrder, 1000)
+            return scrollTo(sectionOrder, 1000, {offset: navHeight * -1})
         });
     }
 
@@ -41,16 +62,61 @@ $(document).ready(() => {
             event.preventDefault();
 
             if (hTopMenu.hasClass("is-opened")) {
-                return scrollTo($(this).attr("href"), 1000) && hTopMenu.fadeOut() && btnCloseMenu.fadeOut();
+                return scrollTo($(this).attr("href"), 1000, {offset: navHeight * -1}) && hTopMenu.fadeOut() && btnCloseMenu.fadeOut();
             }
 
-            return true;
+            return scrollTo($(this).attr("href"), 1000, {offset: navHeight * -1});
         });
     }
 
     $("input[name=phone]").mask('+7 (000) 000-00-00', {placeholder: '+7 (___) ___-__-__'});
+
+    /*
+    |-----------------------------------------------------------
+    |   notification
+    |-----------------------------------------------------------
+    */
+    const Notification = {
+        element: false,
+        setElement: function (element) {
+            return this.element = element;
+        },
+        notify: function (message) {
+            if (! this.element) {
+                this.setElement($(".notify"));
+            }
+            return this.element.html('<div>' + message + '</div>') && this.element.fadeIn().delay(7000).fadeOut();
+        }
+    };
+
+    formHandler("#order-form", Notification);
+    formHandler("#contacts-form", Notification);
 });
 
+function formHandler(selector, Notification) {
+    return $(document).on("submit", selector, function(e){
+        e.preventDefault();
+        const _this = $(this),
+            url = _this.attr('action'),
+            data = _this.serialize(),
+            submitBtn = _this.find("button[type=submit]");
+
+        return $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: url,
+            data: data,
+            beforeSend: function() {
+                return submitBtn.addClass("is-sent");
+            },
+            success: function (data) {
+                Notification.notify(data.message);
+                return submitBtn.removeClass("is-sent") && _this.trigger("reset");
+            }
+        });
+    });
+}
+
 $(document).ajaxError(function () {
-    return $('.notify').html('<div>Произошла ошибка =(</div>').fadeIn().delay(3000).fadeOut();
+    return $("form button[type=submit]").removeClass("is-sent") && $('.notify').html('<div>Произошла ошибка =(</div>').fadeIn().delay(3000).fadeOut();
 });
